@@ -42,35 +42,16 @@ $(function(){
     }
   }
 
-  renderTweets(data);
-
   function loadTweets(){
-    // 1. Use jQuery to make request to /tweets and receive array of tweets as JSON.
-    // Note: Main difference from earlier exercise is that we are requesting and handling JSON and not HTML
+    console.log('this ran')
     $.ajax({
       url: 'http://localhost:8080/tweets',
       method: 'GET',
-      success: function (moreTweets) {
-        console.log('Success: ' + moreTweets);
-        moreTweets.serialize();
+      success: function (tweets) {
+        renderTweets(tweets)
       }
     })
   }
 
   loadTweets()
-
-// The one difference is that you are requesting and handling a JSON response instead of an HTML response.
-
-// In order to test/drive the function, you can simply call it right after its definition.
-// We do want to load the tweets on page load anyway, so this is fair.
-
-// This is a good time to remove the hard-coded tweets object that we added earlier in order to drive
-// our renderTweets function.
-
-// You already have a renderTweets function defined which can take in this array of objects and
-// render them to the DOM, so your success callback function will simply call up the renderTweets,
-// passing it the response from the AJAX request.
-
-//Because we've done the leg work of iterating over and rendering the tweet objects in a previous exercise,
-//we only really have to worry about making the AJAX get request and then delegating the work to our renderTweets function.
 })
