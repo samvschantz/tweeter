@@ -27,10 +27,14 @@
       var $button = $('#sendtweet');
       $button.on('click', function(event){
         event.preventDefault();
-        console.log('Performing AJAX call');
-        console.log($('form').serialize())
         $.ajax({
-        })
+        url: 'http://localhost:8080/tweets',
+        data: $('form').serialize(),
+        method: 'POST',
+          success: function (addPost) {
+            console.log('Success: ', addPost);
+          }
+        });
       });
     });
     </script>
