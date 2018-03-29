@@ -83,4 +83,12 @@ $(function(){
       }
       loadTweets()
     });
+
+  var $compose = $('#compose');
+  $compose.on('click', function(event){
+    event.preventDefault();
+    $('.new-tweet').slideToggle('slow', function(){
+      $('.new-tweet textarea').focus()
+    });
+  })
 })

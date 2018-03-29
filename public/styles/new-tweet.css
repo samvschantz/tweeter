@@ -1,4 +1,5 @@
 .new-tweet {
+    display: none;
     border-radius: 5px;
     border: 2px solid #c3c3c3;
     padding: 0em;
