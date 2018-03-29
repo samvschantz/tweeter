@@ -1,9 +1,11 @@
 // 
-// jQuery Flash plugin v1.0
+// flash-message
 // 
-//  - Created by Joel Moss at Codaset (joel@codaset.com)
-//  - http://codaset.com/codaset/jquery-flash
-// 
+//  - Originally created by Joel Moss at Codaset (joel@codaset.com) as jquery-flash
+//  - https://github.com/joelmoss/jquery-flash
+//
+//  - Modified by Widen Enterprises as flash-message
+//  - https://github.com/Widen/flash-message
 // 
 // Simply call the following to show a flash message with the text "This is my message":
 // 
@@ -18,55 +20,76 @@
 // To install, just include this javascript file and the accompanying CSS file into your
 // HTML page. And that's it!
 // 
-// 
-// If you need help, found a bug, or would like to contribute, head on over to
-// http://codaset.com/codaset/jquery-flash
-// 
+//
 
-(function($){ 
-  
+(function($){
   $(function() {
-
+    var defaultOptions = {
+      timeout: 5000
+    };
+    var flashTimeout;
     var flashDiv = '<div id="flash" style="display:none;"> \
-                      <div class="flash_close"></div> \
-                      <div class="flash_inner"></div> \
-                    </div>';
+	                      <div class="flash_close"></div> \
+	                      <div class="flash_inner"></div> \
+	                    </div>';
     $(flashDiv).appendTo('body');
-  
+
     $.extend({
       flash: function(content, options) {
+        options = options || defaultOptions;
         var flash = $('#flash');
-      
-        flash.find('.flash_inner').html(content);
-        flash
-          .show()
-          .css({opacity: 0})
-          .bottom()
-          .animate({
-            top: (($(window).height()-flash.height()))-50+'px',
-            opacity: 0.8
-          });
-        
-        $(document).click(function(){
+
+        var fadeAway = function() {
           flash.animate({
-            top: ($(window).height()+50)+'px',
+            top: '-50px',
             opacity: 0
+          }, function() {
+            flash.hide();
           });
+        };
+
+        flash.find('.flash_inner').html(content);
+
+        if(flash.is(':visible' && flashTimeout)) {
+          window.clearTimeout(flashTimeout);
+        }
+
+        flash
+            .show()
+            .css({opacity: 0})
+            .top()
+            .animate({
+              top: '0px',
+              opacity: 0.9
+            }, function() {
+              if(flashTimeout) {
+                window.clearTimeout(flashTimeout);
+              }
+              if(options.timeout) {
+                flashTimeout = window.setTimeout(fadeAway, options.timeout);
+              }
+            });
+
+        flash.find('.flash_close').click(function () {
+          $('#flash').hide();
+          if(flashTimeout) {
+            window.clearTimeout(flashTimeout);
+          }
         });
+
       }
     });
-  
+
     $.fn.extend({
-      bottom: function() {
-        var offLeft = Math.floor((($(window).width()-this.width())/2)-20),
-            offTop = Math.floor($(window).height()+50);
+      top : function() {
+        var offLeft = Math.floor((($(window).width()-this.width())/2)-20);
         this.css({
-          top: ((offTop != null && offTop > 0) ? offTop : '0')+ 'px',
+          top: '-50px',
           left: ((offLeft != null && offLeft > 0) ? offLeft :'0') + 'px'
         });
         return this;
       },
-    
+
       flash: function(options) {
         $.flash(this.html(), options);
         return this;
@@ -74,5 +97,5 @@
     });
 
   });
-  
+
 })(jQuery); 
