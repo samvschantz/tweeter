@@ -18,7 +18,7 @@ $(function(){
 
     //header
     var $img = $("<img>").attr("src", largeAvatar);
-    var $displayName = $(`<div>`).addClass("displayName").append(`${name}</div>`);
+    var $displayName = $(`<div class="displayName">${name}</div>`);
     var $userName = $(`<div>`).addClass("userName").append(`${handle}</div>`);
     var $header = $("<header>");
     $($header).append($img);
@@ -32,13 +32,16 @@ $(function(){
     $($tweet).append($content);
 
     //footer
-    var $footer = $("<footer>");
+    var $footer = $(`<footer>`);
     var $daysSince = $(`<div>${created_at}</div>`).addClass("daysSince");
+    //var $icons = $(`<div class="icons"></div>`)
+    //var $i = $(`<i class="fa fa-retweet"></i>`).addClass("icons");
     $($footer).append($daysSince);
-    $($tweet).append($footer)
-    $($tweet).append("</article>")
+    //$($footer).append($icons);
+    $($tweet).append($footer);
+    $($tweet).append("</article>");
 
-    return $tweet
+    return $tweet;
   }
 
   //goes through tweets and displays using previously defined function
