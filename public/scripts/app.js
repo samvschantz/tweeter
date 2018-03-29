@@ -9,6 +9,12 @@ $(function(){
 
     var $tweet = $("<article>").addClass("oldTweet");
 
+    function escape(str) {
+      var div = document.createElement('div');
+      div.appendChild(document.createTextNode(str));
+      return div.innerHTML;
+    }
+
     //header
     var $img = $("<img>").attr("src", largeAvatar);
     var $displayName = $(`<div>`).addClass("displayName").append(`${name}</div>`);
@@ -21,7 +27,7 @@ $(function(){
     $($tweet).append($header);
 
     //content
-    var $content = $(`<div>${content}</div>`).addClass("content");
+    var $content = $(`<div>${escape(content)}</div>`).addClass("content");
     $($tweet).append($content);
 
     //footer
