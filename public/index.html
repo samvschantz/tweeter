@@ -24,30 +24,6 @@
     <script type="text/javascript" src="/scripts/hover-icons.js"></script>
     <script type="text/javascript" src="/scripts/jquery.flash.js"></script>
 
-    <script>
-    $(function(){
-      var $button = $('#sendtweet');
-      $button.on('click', function(event){
-        event.preventDefault();
-        var charLeft = $('form').text()
-        if (charLeft > 139){
-          $.flash('Write more!');
-        } else if (charLeft < 0){
-          $.flash('Tweets must be less than 140 characters!');
-        } else {
-          $.ajax({
-          url: 'http://localhost:8080/tweets',
-          data: $('form').serialize(),
-          method: 'POST',
-            success: function (addPost) {
-              console.log('Success: ', addPost);
-            }
-          });
-        }
-      });
-    });
-    </script>
-
   </head>
 
   <body>

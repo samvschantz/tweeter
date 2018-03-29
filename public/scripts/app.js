@@ -38,7 +38,7 @@ $(function(){
   function renderTweets(tweets) {
     for (i in tweets){
       var $tweet = createTweetElement(tweets[i])
-      $('#tweetContainer').append($tweet);
+      $('#tweetContainer').prepend($tweet);
     }
   }
 
@@ -47,10 +47,33 @@ $(function(){
       url: 'http://localhost:8080/tweets',
       method: 'GET',
       success: function (tweets) {
+        console.log(tweets)
         renderTweets(tweets)
       }
     })
   }
 
   loadTweets()
+
+  var $button = $('#sendtweet');
+    $button.on('click', function(event){
+      event.preventDefault();
+      var charLeft = $('form').text()
+      if (charLeft > 139){
+        $.flash('Write more!');
+      } else if (charLeft < 0){
+        $.flash('Tweets must be less than 140 characters!');
+      } else {
+        $.get('/tweets').done(function() {
+          $('#tweetContainer').empty()
+        })
+
+        var data = $('form').serialize()
+
+        $.post('/tweets', data).done(function() {
+          loadTweets()
+        })
+      }
+      loadTweets()
+    });
 })
