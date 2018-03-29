@@ -43,7 +43,6 @@ $(function(){
   }
 
   function loadTweets(){
-    console.log('this ran')
     $.ajax({
       url: 'http://localhost:8080/tweets',
       method: 'GET',
