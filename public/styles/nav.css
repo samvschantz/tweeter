@@ -19,3 +19,28 @@
   font-size: 200%;
   line-height: 60px;
 }
+
+button:hover {
+  background-color: #f9f9f9;
+}
+
+button {
+  background-color: #ddeff1;
+  float: right;
+  padding: 1em 1em 1em 2em;
+  margin: .5em;
+  border-radius: 5px;
+  border: 1px solid black;
+  color: #507d6b;
+}
+
+.fa {
+   position: absolute;
+   z-index: 0;
+   right: 5em;
+   bottom: .3em;
+   padding: 2em;
+   margin: 2em;
+   color: #507d6b;
+   pointer-events:none;
+}

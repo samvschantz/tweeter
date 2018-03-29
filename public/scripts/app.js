@@ -9,6 +9,7 @@ $(function(){
 
     var $tweet = $("<article>").addClass("oldTweet");
 
+    //security against xss
     function escape(str) {
       var div = document.createElement('div');
       div.appendChild(document.createTextNode(str));
