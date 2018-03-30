@@ -34,10 +34,18 @@ $(function(){
     //footer
     var $footer = $(`<footer>`);
     var $daysSince = $(`<div>${created_at}</div>`).addClass("daysSince");
-    //var $icons = $(`<div class="icons"></div>`)
-    //var $i = $(`<i class="fa fa-retweet"></i>`).addClass("icons");
+    var $icons = $(`<div>`).addClass("icons");
+    var $test = $(`<div>test</div>`)
+    var $heart = $(`<i>`).addClass("fa fa-heart")
+    var $retweet = $(`<i>`).addClass("fa fa-retweet")
+    var $flag = $(`<i>`).addClass("fa fa-flag")
+    $($icons).append($heart);
+    $($icons).append($retweet);
+    $($icons).append($flag);
     $($footer).append($daysSince);
-    //$($footer).append($icons);
+
+    $($footer).append($icons);
+
     $($tweet).append($footer);
     $($tweet).append("</article>");
 
