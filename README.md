@@ -20,3 +20,8 @@ This repository was forked and cloned from a starting repository, then built upo
 "md5": "^2.1.0",
 "moment": "^2.21.0",
 "mongodb": "^2.2.35"
+
+## Screenshots
+
+!["Screenshot with compose box"](https://github.com/samvschantz/tweeter/blob/master/docs/ComposeBoxToggledOn.png)
+!["Screenshot without compose box"](https://github.com/samvschantz/tweeter/blob/master/docs/WithoutComposeBox.png)
