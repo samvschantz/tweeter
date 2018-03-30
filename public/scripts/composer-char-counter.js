@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', function(event) {
   $('.new-tweet textarea').on('keypress',function () {
     var enteredText = $('textarea').val();
+    console.log(enteredText.length)
     var count = enteredText.length + 1;
     var charLeft = 140 - count;
     if (charLeft < 0){

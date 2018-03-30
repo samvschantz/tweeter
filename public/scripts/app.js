@@ -88,6 +88,7 @@ $(function(){
       } else {
         $.get('/tweets').done(function() {
           $('#tweetContainer').empty()
+          $('.new-tweet textarea').val('')
         })
 
         var data = $('form').serialize()
