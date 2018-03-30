@@ -1,11 +1,15 @@
 $(function(){
+  //moment().format();
+
   //function for transforming received tweet data into HTML
   function createTweetElement(tweetData){
     var name = tweetData['user']['name'];
     var largeAvatar = tweetData['user']['avatars']['large'];
     var handle = tweetData['user']['handle'];
     var content = tweetData['content']['text'];
-    var created_at = tweetData['created_at'];
+    var dateNums = (tweetData['created_at']);
+    var dayPosted = new Date(dateNums)
+    var currentDay = new Date()
 
     var $tweet = $("<article>").addClass("oldTweet");
 
@@ -33,7 +37,7 @@ $(function(){
 
     //footer
     var $footer = $(`<footer>`);
-    var $daysSince = $(`<div>${created_at}</div>`).addClass("daysSince");
+    var $daysSince = $(`<div>${(currentDay.getUTCDay() - dayPosted.getUTCDay())} days ago</div>`).addClass("daysSince");
     var $icons = $(`<div>`).addClass("icons");
     var $test = $(`<div>test</div>`)
     var $heart = $(`<i>`).addClass("fa fa-heart")
