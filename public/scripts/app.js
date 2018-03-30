@@ -1,6 +1,4 @@
 $(function(){
-  //moment().format();
-
   //function for transforming received tweet data into HTML
   function createTweetElement(tweetData){
     var name = tweetData['user']['name'];
@@ -8,8 +6,8 @@ $(function(){
     var handle = tweetData['user']['handle'];
     var content = tweetData['content']['text'];
     var dateNums = (tweetData['created_at']);
-    var dayPosted = new Date(dateNums)
-    var currentDay = new Date()
+    var dayPosted = new Date(dateNums);
+    var currentDay = new Date();
 
     var $tweet = $("<article>").addClass("oldTweet");
 
@@ -59,7 +57,7 @@ $(function(){
   //goes through tweets and displays using previously defined function
   function renderTweets(tweets) {
     for (i in tweets){
-      var $tweet = createTweetElement(tweets[i])
+      var $tweet = createTweetElement(tweets[i]);
       $('#tweetContainer').prepend($tweet);
     }
   }
@@ -69,42 +67,42 @@ $(function(){
       url: 'http://localhost:8080/tweets',
       method: 'GET',
       success: function (tweets) {
-        console.log(tweets)
-        renderTweets(tweets)
+        renderTweets(tweets);
       }
     })
   }
 
-  loadTweets()
+  loadTweets();
 
   var $button = $('#sendtweet');
     $button.on('click', function(event){
       event.preventDefault();
-      var charLeft = $('form').text()
+      var charLeft = $('form').text();
       if (charLeft > 139){
         $.flash('Write more!');
       } else if (charLeft < 0){
         $.flash('Tweets must be less than 140 characters!');
       } else {
         $.get('/tweets').done(function() {
-          $('#tweetContainer').empty()
-          $('.new-tweet textarea').val('')
+          $('#tweetContainer').empty();
+          $('.new-tweet textarea').val('');
+          $('.counter').html('<span class="counter" style="float:right;padding:0em1em0em1em;font-style:italic;font-size:normal;">140</span>');
         })
 
-        var data = $('form').serialize()
+        var data = $('form').serialize();
 
         $.post('/tweets', data).done(function() {
-          loadTweets()
+          loadTweets();
         })
       }
-      loadTweets()
+      loadTweets();
     });
 
   var $compose = $('#compose');
   $compose.on('click', function(event){
     event.preventDefault();
     $('.new-tweet').slideToggle('slow', function(){
-      $('.new-tweet textarea').focus()
+      $('.new-tweet textarea').focus();
     });
   })
 })
